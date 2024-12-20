@@ -3,4 +3,4 @@ __pycache__/
 .venv
 .DS_Store
 .env.docker
-vorkers_tz_api/.env
+workers_tz_api/.env

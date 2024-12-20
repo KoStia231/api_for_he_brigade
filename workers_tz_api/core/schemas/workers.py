@@ -3,23 +3,23 @@ from typing import Optional
 from pydantic import BaseModel
 
 
-class VorkersBase(BaseModel):
+class WorkerBase(BaseModel):
     full_name: str
-    number_brigade: int
     salary: float
     specialization: str
+    brigade_id: Optional[int] = None
 
 
-class VorkersCreate(VorkersBase):
+class WorkerCreate(WorkerBase):
     pass
 
 
-class VorkersUpdate(BaseModel):
+class WorkerUpdate(BaseModel):
     full_name: Optional[str] = None
-    number_brigade: Optional[int] = None
     salary: Optional[float] = None
     specialization: Optional[str] = None
+    brigade_id: Optional[int] = None
 
 
-class VorkersResponse(VorkersBase):
+class WorkerResponse(WorkerBase):
     id: int
