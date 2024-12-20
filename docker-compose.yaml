@@ -1,0 +1,35 @@
+version: '3'
+
+services:
+
+  db:
+    image: postgres:latest
+    env_file:
+      - .envS.dockerS
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: >
+      bash -c "
+        echo 'Applying migrations...' &&
+        cd vorkers_tz_api &&
+        alembic upgrade head &&
+        echo 'Start Server...' &&
+        echo 'Developer Asmolov Konstantin' && 
+        uvicorn main:app --host 0.0.0.0 --port 8000 --reload
+      "
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    env_file:
+      - vorkers_tz_api/.env
+    volumes:
+      - .:/app
+
+volumes:
+  postgres_data:
